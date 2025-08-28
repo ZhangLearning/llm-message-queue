@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ZhangLearning/llm-message-queue/actions"><img src="https://github.com/ZhangLearning/llm-message-queue/workflows/Go/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/ZhangLearning/llm-message-queue/actions/workflows/go.yml"><img src="https://github.com/ZhangLearning/llm-message-queue/workflows/Go/badge.svg" alt="Build Status"></a>
   <a href="https://codecov.io/gh/ZhangLearning/llm-message-queue"><img src="https://codecov.io/gh/ZhangLearning/llm-message-queue/branch/main/graph/badge.svg" alt="Code Coverage"></a>
   <a href="https://goreportcard.com/report/github.com/ZhangLearning/llm-message-queue"><img src="https://goreportcard.com/badge/github.com/ZhangLearning/llm-message-queue" alt="Go Report Card"></a>
   <a href="https://github.com/ZhangLearning/llm-message-queue/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ZhangLearning/llm-message-queue.svg" alt="License"></a>
