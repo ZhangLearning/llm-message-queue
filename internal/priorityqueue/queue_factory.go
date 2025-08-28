@@ -1,6 +1,7 @@
 package priorityqueue
 
 import (
+	"fmt"
 	"sync"
 
 	"llm-message-queue/pkg/config"
@@ -233,5 +234,5 @@ func (qf *QueueFactory) createPriorityRules() []PriorityAdjustRule {
 
 // 生成工作器ID
 func (qf *QueueFactory) generateWorkerID(queueName string, index int) string {
-	return queueName + "-worker-" + string(index)
+	return queueName + "-worker-" + fmt.Sprint(index)
 }

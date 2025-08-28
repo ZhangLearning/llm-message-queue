@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -198,7 +199,7 @@ func (s *APIServer) submitMessage(c *gin.Context) {
 	}
 
 	// 将消息推送到队列
-	if err := queueManager.PushMessage(string(processedMessage.Priority), processedMessage); err != nil {
+	if err := queueManager.PushMessage(fmt.Sprint(processedMessage.Priority), processedMessage); err != nil {
 		s.Logger.Error("Failed to push message to queue", zap.Error(err))
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to queue message"})
 		return
@@ -213,7 +214,7 @@ func (s *APIServer) submitMessage(c *gin.Context) {
 		"message_id":     processedMessage.ID,
 		"priority":       processedMessage.Priority,
 		"queue_time":     time.Now(),
-		"estimated_wait": s.estimateWaitTime(string(processedMessage.Priority)),
+		"estimated_wait": s.estimateWaitTime(fmt.Sprint(processedMessage.Priority)),
 	})
 }
 
@@ -354,7 +355,7 @@ func (s *APIServer) addMessageToConversation(c *gin.Context) {
 		return
 	}
 
-	if err := queueManager.PushMessage(string(processedMessage.Priority), processedMessage); err != nil {
+	if err := queueManager.PushMessage(fmt.Sprint(processedMessage.Priority), processedMessage); err != nil {
 		s.Logger.Error("Failed to push message to queue", zap.Error(err))
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to queue message"})
 		return
@@ -365,7 +366,7 @@ func (s *APIServer) addMessageToConversation(c *gin.Context) {
 		"conversation_id": conversationID,
 		"priority":        processedMessage.Priority,
 		"queue_time":      time.Now(),
-		"estimated_wait":  s.estimateWaitTime(string(processedMessage.Priority)),
+		"estimated_wait":  s.estimateWaitTime(fmt.Sprint(processedMessage.Priority)),
 	})
 }
 

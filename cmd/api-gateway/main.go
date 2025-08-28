@@ -66,7 +66,7 @@ func main() {
 	multiQueue := priorityqueue.NewMultiLevelQueue(cfg.Queue.DefaultMaxSize)
 	for _, q := range cfg.Queue.Levels {
 		priority := models.Priority(q.Priority)
-		multiQueue.AddQueue(string(priority))
+		multiQueue.AddQueue(fmt.Sprint(priority))
 	}
 
 	// Initialize StateManager
@@ -103,7 +103,7 @@ func main() {
 			msg.UpdatedAt = time.Now()
 
 			// Add message to queue
-			queueName := string(msg.Priority) // Use priority as queue name
+			queueName := fmt.Sprint(msg.Priority) // Use priority as queue name
 			err := multiQueue.Push(queueName, &msg, int(msg.Priority))
 			if err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to add message to queue: %v", err)})
@@ -180,7 +180,7 @@ func main() {
 
 	// Start HTTP server
 	go func() {
-		if err := r.Run(fmt.Sprintf(":%s", cfg.Server.Port)); err != nil && err != http.ErrServerClosed {
+		if err := r.Run(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()

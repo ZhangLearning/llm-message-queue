@@ -1,6 +1,7 @@
 package preprocessor
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -100,7 +101,7 @@ func (p *Preprocessor) ProcessMessage(msg *models.Message) *models.Message {
 
 	// Set default queue name based on priority if not specified
 	if msg.QueueName == "" {
-		msg.QueueName = string(msg.Priority)
+		msg.QueueName = fmt.Sprint(msg.Priority)
 	}
 
 	// Set timestamps if not already set

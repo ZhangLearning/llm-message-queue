@@ -28,7 +28,7 @@ func main() {
 	}
 
 	// Initialize PostgreSQL
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=Asia/Shanghai",
 		cfg.Database.Postgres.Host,
 		cfg.Database.Postgres.User,
 		cfg.Database.Postgres.Password,
