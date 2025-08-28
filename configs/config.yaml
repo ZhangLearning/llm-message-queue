@@ -1,0 +1,59 @@
+server:
+  port: 8080
+  host: "0.0.0.0"
+  mode: "debug"
+
+database:
+  postgres:
+    host: "localhost"
+    port: 5432
+    user: "postgres"
+    password: "password"
+    dbname: "llm_queue"
+    sslmode: "disable"
+
+  redis:
+    addr: "localhost:6379"
+    password: ""
+    db: 0
+    pool_size: 100
+
+queue:
+  levels:
+    - name: "realtime"
+      priority: 1
+      max_wait_time: "1s"
+      max_concurrent: 100
+    - name: "high"
+      priority: 2
+      max_wait_time: "5s"
+      max_concurrent: 200
+    - name: "normal"
+      priority: 3
+      max_wait_time: "30s"
+      max_concurrent: 500
+    - name: "low"
+      priority: 4
+      max_wait_time: "5m"
+      max_concurrent: 1000
+
+scheduler:
+  strategy: "priority_weighted"
+  check_interval: "100ms"
+  max_retries: 3
+  timeout: "30s"
+
+loadbalancer:
+  algorithm: "weighted_round_robin"
+  health_check_interval: "30s"
+  max_failures: 3
+
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+
+metrics:
+  enabled: true
+  port: 9090
+  path: "/metrics"
